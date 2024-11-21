@@ -19,26 +19,26 @@ class _F1DriverListState extends State<F1DriverList> {
 
   void _navigateTo(int index) {
     if (index != _currentIndex) {
-      if (index == 1) {
+      if (index == 0) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage(currentUser: widget.currentUser)),
+          MaterialPageRoute(builder: (context) => HomePage(currentUser: widget.currentUser)),
           (route) => false,
         );
-      } else if (index == 1) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => KesanPesanPage(currentUser: widget.currentUser)),
-          (route) => false, // Menghapus semua rute sebelumnya
-        );
-      } else if (index == 2) {
+      }  else if (index == 2) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => ProfilePage(currentUser: widget.currentUser)),
           (route) => false, 
         );
       }
-    }
+    } else if (index == 1) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => KesanPesanPage(currentUser: widget.currentUser)),
+          (route) => false, // Menghapus semua rute sebelumnya
+        );
+      }
   }
 
   final F1APIService apiService = F1APIService();
