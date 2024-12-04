@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nyobatugasakhir2/pages/homePage.dart';
 import 'package:nyobatugasakhir2/services/dbHelper.dart';
 import 'registerpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -20,6 +21,10 @@ class _LoginPageState extends State<LoginPage> {
     bool isAuthenticated = await DatabaseHelper.instance.authenticate(username, password);
 
     if (isAuthenticated) {
+      // Simpan username ke SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('username', username);
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage(currentUser: username)),
@@ -30,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       );
     }
   }
+
 
 
   @override
